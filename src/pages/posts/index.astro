@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/formattedDate.astro';
+
+// Import CSS styles
+import '../../styles/global.css';
+
+// Sort posts by publication date, most recent first
+const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<div class="posts-page page-shell">
+    <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+    </div>
+    <!-- Text above list of posts -->
+    <header class="page-header">
+        <h1>My Very Weird Blog Posts</h1>
+        <p class="tagline">Maybe try reading one!</p>
+    </header>
+
+    {posts.length === 0 && <p class="empty">No posts yet :(</p>}
+
+    <!-- Container with the list of blog posts -->
+    <div class="posts">
+        {posts.map((post) => (
+            <article class="post-card">
+                <a href={`/posts/${post.id}`} class="title-link">
+                    {post.data.title}
+                </a>
+                <p class="description">{post.data.description}</p>
+                <p class="meta">
+                    Published on <FormattedDate date={post.data.pubDate} />
+                </p>
+            </article>
+        ))}
+    </div>
+</div>

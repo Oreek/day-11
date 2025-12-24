@@ -1,16 +1,23 @@
 ---
-
+// Import CSS styles
+import '../styles/global.css';
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Oreek's Blog</title>
+    </head>
+    <body>
+        <main class="page-shell home">
+            <div class="page-header">
+                <h1>Oreek's Blog</h1>
+                <p class="tagline">Kinda simple so don't judge!</p>
+                <a href="/posts" class="posts-link">See Posts</a>
+            </div>
+        </main>
+    </body>
 </html>

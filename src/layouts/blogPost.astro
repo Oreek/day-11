@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+// Import the FormattedDate component
+import FormattedDate from '../components/formattedDate.astro';
+
+// Import CSS styles
+import '../styles/global.css';
+import '../styles/post.css';
+
+// Get the blog post data from props
+type Props = CollectionEntry<'blog'>['data'];
+const { title, description, pubDate, heroImage } = Astro.props;
+---
+<div class="post-page page-shell">
+    <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/posts" class="nav-link">Back to posts</a>
+    </div>
+    <article class="post">
+        <!-- Header with post data -->
+        <header>
+            <h1>{title}</h1>
+            <p class="description">{description}</p>
+            {heroImage && (
+                <Image src={heroImage} format="webp" alt={title} class="hero" />
+            )}
+            <p class="date">
+                <FormattedDate date={pubDate} />
+            </p>
+        </header>
+
+        <!-- The post's content will be rendered in the slot tag -->
+        <div class="body">
+            <slot />
+        </div>
+    </article>
+</div>
